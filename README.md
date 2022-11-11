@@ -110,3 +110,47 @@ auto eth0
 iface eth0 inet dhcp
 
 ```
+## Package Installation
+### **Ostania**
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 192.179.0.0/16
+apt-get update
+apt-get install isc-dhcp-relay -y
+```
+### **SSS** & **GARDEN**
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install lynx -y
+apt install speedtest-cli -y
+```
+### **WISE**
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install bind9 -y
+```
+### **Berlint**
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install squid -y
+```
+### **Westalis**
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install isc-dhcp-server -y
+dhcpd --version
+```
+### **Eden**
+```
+echo nameserver 192.168.122.1 > /etc/resolv.conf
+apt-get update
+apt-get install apache2 -y
+apt-get install php -y
+apt-get install libapache2-mod-php7.0
+apt-get install lynx -y
+apt install speedtest-cli
+```
