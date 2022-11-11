@@ -154,3 +154,6 @@ apt-get install libapache2-mod-php7.0
 apt-get install lynx -y
 apt install speedtest-cli
 ```
+## Soal
+Loid bersama Franky berencana membuat peta tersebut dengan kriteria WISE sebagai DNS Server, Westalis sebagai DHCP Server, Berlint sebagai Proxy Server (1), dan Ostania sebagai DHCP Relay (2). Loid dan Franky menyusun peta tersebut dengan hati-hati dan teliti.
+
