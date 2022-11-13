@@ -84,6 +84,8 @@ iface eth0 inet static
 	netmask 255.255.255.0
 	gateway 192.179.3.1
 
+#auto eth0
+#iface eth0 inet dhcp
 
 ```
 ### **NewstonCastle**
@@ -154,10 +156,105 @@ apt-get install libapache2-mod-php7.0
 apt-get install lynx -y
 apt install speedtest-cli
 ```
-## Soal
-Loid bersama Franky berencana membuat peta tersebut dengan kriteria WISE sebagai DNS Server, Westalis sebagai DHCP Server, Berlint sebagai Proxy Server (1), dan Ostania sebagai DHCP Relay (2). Loid dan Franky menyusun peta tersebut dengan hati-hati dan teliti.
 
-### No.1
+## Soal 1
+Loid bersama Franky berencana membuat peta tersebut dengan kriteria WISE sebagai DNS Server, Westalis sebagai DHCP Server, Berlint sebagai Proxy Server
+
+**WISE**  
+Membuat domain website **loid-work.com** dan **franky-work.com**
+
+- /etc/bind/named.conf.local
+
+	```
+	zone "loid-work.com" {
+					type master;
+					file "/etc/bind/b13/loid-work.com";
+	};
+
+	zone "franky-work.com" {
+					type master;
+					file "/etc/bind/b13/franky-work.com";
+	};
+	```
+- /etc/bind/b13/loid-work.com
+	```
+	;
+	; BIND data file for local loopback interface
+	;
+	$TTL    604800
+	@       IN      SOA     loid-work.com. root.loid-work.com. (
+											2022110701         ; Serial
+												604800         ; Refresh
+												 86400         ; Retry
+											   2419200         ; Expire
+												604800 )       ; Negative Cache TTL
+	;
+	@       IN      NS      loid-work.com.
+	@       IN      A       192.179.3.13    ; IP Eden
+	www     IN      CNAME   loid-work.com.
+	@       IN      AAAA    ::1
+	```
+- /etc/bind/b13/franky-work.com
+	```
+	;
+	; BIND data file for local loopback interface
+	;
+	$TTL    604800
+	@       IN      SOA     franky-work.com. root.franky-work.com. (
+											2022110701    ; Serial
+											604800        ; Refresh
+											86400         ; Retry
+											2419200		  ; Expire
+											604800 )      ; Negative Cache TTL
+	;
+	@       IN      NS      franky-work.com.
+	@       IN      A       192.179.3.13    ; IP Eden
+	www     IN      CNAME   franky-work.com.
+	@       IN      AAAA    ::1
+	```
+
+**Westalis**
+- /etc/default/isc-dhcp-server 
+
+	menambahkan eth0 pada interfaces
+	```
+	INTERFACES="eth0"
+	```
+- /etc/dhcp/dhcpd.conf
+
+	```
+	subnet 192.179.2.0 netmask 255.255.255.0 {
+
+	}
+
+	subnet 192.179.1.0 netmask 255.255.255.0 {
+			range 192.179.1.50 192.179.1.88;
+			range 192.179.1.120 192.179.1.155;
+			option routers 192.179.1.1;
+			option broadcast-address 192.179.1.255;
+			option domain-name-servers 192.179.2.2;
+			default-lease-time 300;
+			max-lease-time 6900;
+	}
+
+	subnet 192.179.3.0 netmask 255.255.255.0 {
+			range 192.179.3.10 192.179.3.30;
+			range 192.179.3.60 192.179.3.95;
+			option routers 192.179.3.1;
+			option broadcast-address 192.179.3.255;
+			option domain-name-servers 192.179.2.2;
+			default-lease-time 600;
+			max-lease-time 6900;
+	}
+	```
+
+**Berlint**
+- /etc/squid/squid.conf
+	```
+	http_port 8080
+	visible_hostname Berlint
+	``` 
+
 
 
 
