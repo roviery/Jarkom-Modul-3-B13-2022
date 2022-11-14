@@ -283,6 +283,9 @@ Ostania sebagai DHCP Relay
 Client yang melalui Switch1 mendapatkan range IP dari [prefix IP].1.50 - [prefix IP].1.88 dan [prefix IP].1.120 - [prefix IP].1.155
 
 Penyelesaian:
+
+**Westalis**
+
 - Menambahkan range pada dhcpd.conf di Switch1
 	```
 	subnet 192.179.1.0 netmask 255.255.255.0 {
@@ -300,6 +303,9 @@ Penyelesaian:
 Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.10 - [prefix IP].3.30 dan [prefix IP].3.60 - [prefix IP].3.85
 
 Penyelesaian:
+
+**Westalis**
+
 - Menambahkan range pada dhcpd.conf di Switch3
 	```
 	subnet 192.179.3.0 netmask 255.255.255.0 {
@@ -319,6 +325,7 @@ Client mendapatkan DNS dari WISE dan client dapat terhubung dengan internet mela
 Penyelesaian:
 
 **WISE**
+
 - Mengatur forwarders dan allow-query{any;} pada **/etc/bind/named.conf.options**
 	```
 	options {
