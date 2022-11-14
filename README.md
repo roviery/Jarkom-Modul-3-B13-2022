@@ -397,3 +397,28 @@ Penyelesaian:
 		fixed-address 192.179.3.13;
 	}
 	```
+
+## Soal 1 (Proxy)
+Client hanya dapat mengakses internet diluar (selain) hari & jam kerja (senin-jumat 08.00 - 17.00) dan hari libur (dapat mengakses 24 jam penuh)
+
+Penyelesaian:
+
+**Berlint**
+
+- Menambahkan aturan ada squid.conf
+	```
+	acl WORK_TIME time MTWHF 08:00-17:00
+	acl FREE_TIME time MTWHF 00:00-08:00
+	acl FREE_TIME2 time MTWHF 17:00-24:00
+	acl FREE_TIME3 time AS 00:00-24:00
+	acl FREE time AS SMTWHFA 00:00-24:00
+
+	http_port 8080
+	visible_hostname Berlint
+	http_access deny WORK_TIME
+	http_access allow FREE_TIME
+	http_access allow FREE_TIME2
+	http_access allow FREE_TIME3
+	http_access allow FREE
+	http_access deny all
+	```
