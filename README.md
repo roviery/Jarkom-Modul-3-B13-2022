@@ -279,6 +279,23 @@ Ostania sebagai DHCP Relay
 	OPTIONS=""
 	```
 
+## Soal 3
+Client yang melalui Switch1 mendapatkan range IP dari [prefix IP].1.50 - [prefix IP].1.88 dan [prefix IP].1.120 - [prefix IP].1.155
+
+Penyelesaian:
+- Menambahkan range pada dhcpd.conf di Switch1
+	```
+	subnet 192.179.1.0 netmask 255.255.255.0 {
+			range 192.179.1.50 192.179.1.88;
+			range 192.179.1.120 192.179.1.155;
+			option routers 192.179.1.1;
+			option broadcast-address 192.179.1.255;
+			option domain-name-servers 192.179.2.2;
+			default-lease-time 300;
+			max-lease-time 6900;
+	}
+	```
+
 
 
 
