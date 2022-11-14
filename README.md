@@ -296,7 +296,22 @@ Penyelesaian:
 	}
 	```
 
+## Soal 4
+Client yang melalui Switch3 mendapatkan range IP dari [prefix IP].3.10 - [prefix IP].3.30 dan [prefix IP].3.60 - [prefix IP].3.85
 
+Penyelesaian:
+- Menambahkan range pada dhcpd.conf di Switch3
+	```
+	subnet 192.179.3.0 netmask 255.255.255.0 {
+			range 192.179.3.10 192.179.3.30;
+			range 192.179.3.60 192.179.3.95;
+			option routers 192.179.3.1;
+			option broadcast-address 192.179.3.255;
+			option domain-name-servers 192.179.2.2;
+			default-lease-time 600;
+			max-lease-time 6900;
+	}
+	```
 
 
 
