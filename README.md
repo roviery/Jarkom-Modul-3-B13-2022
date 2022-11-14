@@ -384,4 +384,16 @@ Penyelesaian:
 	}
 	```
 
+## Soal 7
+Loid dan Franky berencana menjadikan Eden sebagai server untuk pertukaran informasi dengan alamat IP yang tetap dengan IP [prefix IP].3.13
 
+Penyelesaian:
+
+**Westalis**
+- Menambahkan host Eden pada dhcpd.conf untuk fixed-address
+	```
+	host Eden {
+		hardware ethernet 08:00:07:26:c0:a5;
+		fixed-address 192.179.3.13;
+	}
+	```
