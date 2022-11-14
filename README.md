@@ -253,7 +253,31 @@ Membuat domain website **loid-work.com** dan **franky-work.com**
 	```
 	http_port 8080
 	visible_hostname Berlint
-	``` 
+	```
+
+## Soal 2
+Ostania sebagai DHCP Relay
+
+**Ostania**
+- /etc/default/isc-dhcp-relay
+	```
+	# Defaults for isc-dhcp-relay initscript
+	# sourced by /etc/init.d/isc-dhcp-relay
+	# installed at /etc/default/isc-dhcp-relay by the maintainer scripts
+
+	#
+	# This is a POSIX shell fragment
+	#
+
+	# What servers should the DHCP relay forward requests to?
+	SERVERS="192.179.2.4"
+
+	# On what interfaces should the DHCP relay (dhrelay) serve DHCP requests?
+	INTERFACES="eth1 eth2 eth3"
+
+	# Additional options that are passed to the DHCP relay daemon?
+	OPTIONS=""
+	```
 
 
 
