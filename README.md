@@ -422,3 +422,29 @@ Penyelesaian:
 	http_access allow FREE
 	http_access deny all
 	```
+
+## Soal 2 (Proxy)
+Adapun pada hari dan jam kerja sesuai nomor (1), client hanya dapat mengakses domain loid-work.com dan franky-work.com (IP tujuan domain dibebaskan)
+
+Penyelesaian:
+
+**Berlint**
+- Menambahkan list domain yang diizinkan dan jam kerja
+	```
+	acl ALLOW_DOMAIN dstdomain .loid-work.com .franky-work.com
+	acl WORK_TIME time MTWHF 08:00-17:00
+	acl FREE_TIME time MTWHF 00:00-08:00
+	acl FREE_TIME2 time MTWHF 17:00-24:00
+	acl FREE_TIME3 time AS 00:00-24:00
+	acl FREE time AS SMTWHFA 00:00-24:00
+
+	http_port 8080
+	visible_hostname Berlint
+	http_access allow ALLOW_DOMAIN WORK_TIME
+	http_access deny WORK_TIME
+	http_access allow FREE_TIME
+	http_access allow FREE_TIME2
+	http_access allow FREE_TIME3
+	http_access allow FREE
+	http_access deny all
+	```
