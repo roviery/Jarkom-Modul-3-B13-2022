@@ -355,4 +355,33 @@ Penyelesaian:
 	};
 	```
 
+## Soal 6
+Lama waktu DHCP server meminjamkan alamat IP kepada Client yang melalui Switch1 selama 5 menit sedangkan pada client yang melalui Switch3 selama 10 menit. Dengan waktu maksimal yang dialokasikan untuk peminjaman alamat IP selama 115 menit.
+
+Penyelesaian:
+
+**Westalis**
+- Mengatur default-lease-time dan max-lease-time pada dhcpd.conf
+	```
+	subnet 192.179.1.0 netmask 255.255.255.0 {
+			range 192.179.1.50 192.179.1.88;
+			range 192.179.1.120 192.179.1.155;
+			option routers 192.179.1.1;
+			option broadcast-address 192.179.1.255;
+			option domain-name-servers 192.179.2.2;
+			default-lease-time 300;
+			max-lease-time 6900;
+	}
+
+	subnet 192.179.3.0 netmask 255.255.255.0 {
+			range 192.179.3.10 192.179.3.30;
+			range 192.179.3.60 192.179.3.95;
+			option routers 192.179.3.1;
+			option broadcast-address 192.179.3.255;
+			option domain-name-servers 192.179.2.2;
+			default-lease-time 600;
+			max-lease-time 6900;
+	}
+	```
+
 
